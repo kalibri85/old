@@ -1,17 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Homepage - {{ parent() }}{% endblock %}
+{% block title %}Homepage {% endblock %}
 
 {% block body %}
     <div class="title">NFQ Akademija</div>
     <div class="jumbotron">
-        <a class="btn btn-secondary btn-lg" href="{{ path('fos_user_security_login') }}">Login</a>
-        <a class="btn btn-secondary btn-lg" href="{{ path('fos_user_registration_register') }}">Register</a>
-        <a class="btn btn-secondary btn-lg" href="{{ path('fos_user_profile_show') }}">User profile</a>
-        <a class="btn btn-secondary btn-lg" href="{{ path('fos_user_profile_edit') }}">Edit user profile</a>
-        <a class="btn btn-secondary btn-lg" href="{{ path('fos_user_change_password') }}">Change password</a>
-    </div>
-    <div class="jumbotron">
-        <a class="btn btn-info btn-lg" href="{{ path('admin') }}">Our controller</a>
+        {% if  id is defined  %}
+        <a href="{{ 'delete' }}/{{ id }}" class="btn btn-outline-dark">Ištrinti preke {{ id }}?</a>
+         {% else %}
+             <a href="{{ 'add' }}" class="btn btn-outline-dark">Prideti Kategorija ir preke</a>
+        {% endif %}
+
     </div>
 {% endblock %}

@@ -2,10 +2,8 @@
 
 namespace App\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use App\Entity\Categories;
+use App\Entity\Products;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -16,111 +14,58 @@ class HomeController extends Controller
      */
     public function index()
     {
-
         return $this->render('home/index.html.twig');
-
-
     }
+
     /**
-     * @Route("/validate/{element}", name="validatePerson")
-     * @Route("/validate/{element}", name="validateProject")
-     * @Method({"POST"})
+     * @Route("/add", name="add")
      */
-
-    public function validate(Request $request, $element)
+    public function addAction()
     {
-        try {
-            $input = json_decode($request->getContent(), true)['input'];
-        } catch (\Exception $e) {
-             return new JsonResponse(['error' => 'Invalid method'], Response::HTTP_BAD_REQUEST);
-        }
+        $category = 'Komputeriai';
+        $product = ['title'=>'Toshiba',
+                     'price'=>'650eur',
+                     'active'=>1
+        ];
 
-        $students = $this->getStudents();
-        $projects = $this->getProjects();
+        $entityCategories = new Categories();
+        $entityCategories->setTitle($category);
 
-        switch ($element) {
-            case 'name';
-                return new JsonResponse(['valid' => in_array(strtolower($input), $students)]);
-            case 'project';
-                return new JsonResponse(['valid' => in_array(strtolower($input), $projects)]);
-        }
-        return new JsonResponse(['error' => 'Invalid method'], Response::HTTP_BAD_REQUEST);
+        $entityProducts = new Products();
+        $entityProducts->setTitle($product['title']);
+        $entityProducts->setPrice($product['price']);
+        $entityProducts->setCategory($entityCategories);
+        $entityProducts->setActive($product['active']);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($entityProducts);
+        $entityManager->flush();
+
+        return $this->render('home/index.html.twig',[
+            'id' => $entityProducts->getId(),
+
+        ]);
+
+
+
     }
 
-    private function getStorage()
+    /**
+     * @Route("/delete/{id}", name="delete")
+     */
+    public function removeAction($id)
     {
-        return /** @lang json*/
-            '{
-          "Po pamok\u0173": {
-            "mentor": "Tomas",
-            "members": [
-              "Elena",
-              "Just\u0117",
-              "Deimantas"
-            ]
-          },
-          "Tech Guide": {
-            "mentor": "Sergej",
-            "members": [
-              "Matas",
-              "Martynas"
-            ]
-          },
-          "Kelion\u0117s draugas": {
-            "mentor": "Rokas",
-            "members": [
-              "Zbignev",
-              "Aist\u0117"
-            ]
-          },
-          "Wish A Gift": {
-            "mentor": "Aistis",
-            "members": [
-              "Nerijus",
-              "Olga"
-            ]
-          },
-          "Mums pakeliui": {
-            "mentor": "Paulius",
-            "members": [
-              "Egl\u0117",
-              "Svetlana"
-            ]
-          },
-          "Motyvacin\u0117 platforma": {
-            "mentor": "Audrius",
-            "members": [
-              "Viktoras",
-              "Airidas"
-            ]
-          }
-        }';
-
-    }
-
-    private function getStudents() {
-
-        $students = [];
-        $storage = json_decode($this->getStorage(),true);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($entityManager->find(Products::class, $id));
+        $entityManager->flush();
 
 
-        foreach ($storage as $teamDate){
-            foreach ($teamDate['members'] as $student){
-                $students[] = strtolower($student);
-            }
+        return $this->redirect($this->generateUrl('home',
+            [
+                'info'=>'Preke_'.$id.'_ištrinta'
+            ]));
 
-        }
-        return $students;
-    }
 
-    private function getProjects() {
-       $projects = [];
-       $storage = json_decode($this->getStorage(),true);
-
-       foreach (array_keys($storage) as $key){
-           $projects[] = strtolower($key);
-        }
-        return $projects;
     }
 
 }
