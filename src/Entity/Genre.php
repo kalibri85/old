@@ -11,6 +11,7 @@ class Genre
 {
     /**
      * @ORM\Id()
+     * @ORM\OneToMany(targetEntity="Ticket", mappedBy="genre")
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
@@ -33,6 +34,9 @@ class Kernel extends BaseKernel
                 yield new $class();
             }
         }
+        $bundles[] =[
+            new DoctrineFixturesBundle()
+        ];
     }
 
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader)

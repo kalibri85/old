@@ -18,6 +18,19 @@ class TicketRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Ticket::class);
     }
+    /**
+     * @return Trip[]
+     */
+    public function findAllTickets()
+    {
+        $tickets = $this->createQueryBuilder('t')
+            ->Where('t.date >= :today')
+            ->setParameter('today', new \DateTime());
+
+        return $tickets
+            ->getQuery()
+            ->getResult();
+    }
 
 //    /**
 //     * @return Ticket[] Returns an array of Ticket objects

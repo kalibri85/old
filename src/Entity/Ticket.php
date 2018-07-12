@@ -22,7 +22,7 @@ class Ticket
     private $title;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="Genre")
      */
     private $genre;
 
@@ -63,16 +63,20 @@ class Ticket
         return $this;
     }
 
-    public function getGenre(): ?int
+    /**
+     * @return Genre
+     */
+    public function getGenre()
     {
         return $this->genre;
     }
 
-    public function setGenre(int $genre): self
+    /**
+     * @param Genre $genre
+     */
+    public function setGenre(Genre $genre)
     {
         $this->genre = $genre;
-
-        return $this;
     }
 
     public function getDate(): ?\DateTimeInterface
