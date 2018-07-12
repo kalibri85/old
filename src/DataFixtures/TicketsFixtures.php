@@ -21,9 +21,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class TicketsFixtures extends Fixture
 {
-    const PRICE = [70, 50, 40];
-    const GENRE = ['MUSICAL', 'COMEDY', 'DRAMA'];
-
     private $encoder;
 
     public function __construct(UserPasswordEncoderInterface $encoder)
