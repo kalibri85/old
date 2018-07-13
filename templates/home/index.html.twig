@@ -3,13 +3,13 @@
 {% block title %}Homepage {% endblock %}
 
 {% block body %}
-    <div class="title">NFQ Akademija</div>
+    <div class="title"></div>
     <div class="jumbotron">
-        {% if  id is defined  %}
-        <a href="{{ 'delete' }}/{{ id }}" class="btn btn-outline-dark">Ištrinti preke {{ id }}?</a>
-         {% else %}
-             <a href="{{ 'add' }}" class="btn btn-outline-dark">Prideti Kategorija ir preke</a>
-        {% endif %}
+        {{ form_start(form, {attr: {class: 'form-wrap mt-4'}}) }}
+        <div class="btn-group" role="group" aria-label="home search">
+             {{ form_widget(form.date) }}
+        </div>
+        {{ form_end(form) }}
 
     </div>
 {% endblock %}
