@@ -8,19 +8,18 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\Ticket;
 use App\Entity\Genre;
-use Doctrine\ORM\EntityRepository;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 class TicketsFixtures extends Fixture
 {
+    const USER_NAME = 'admin';
+
     private $encoder;
 
     public function __construct(UserPasswordEncoderInterface $encoder)
@@ -30,7 +29,9 @@ class TicketsFixtures extends Fixture
 
     public function load(ObjectManager $entityManager)
     {
-        $fp = fopen('data/shows.csv', 'r');
+        $this->addUser($entityManager);
+
+        $fp = fopen('src/DataFixtures/shows.csv', 'r');
         $prices = ['MUSICAL' => 70,
             'COMEDY' => 50,
             'DRAMA' => 40
@@ -56,7 +57,18 @@ class TicketsFixtures extends Fixture
             $entityManager->flush();
         }
     }
-
+    public function addUser(ObjectManager $entityManager)
+    {
+        $user = new User();
+        $username = self::USER_NAME;
+        $user->setUsername($username);
+        $password = $this->encoder->encodePassword($user, 'testAdmin');
+        $user->setEmail(strtolower(self::USER_NAME) . '@mail.com');
+        $user->setPassword($password);
+        $user->setEnabled(true);
+        $entityManager->persist($user);
+        $entityManager->flush();
+    }
     public function addGenre($data, ObjectManager $entityManager)
     {
         $genre = $entityManager->getRepository(Genre::class)->findOneByGenre($data);
