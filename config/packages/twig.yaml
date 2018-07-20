@@ -2,10 +2,6 @@ twig:
     paths: ['%kernel.project_dir%/templates']
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
-<<<<<<< HEAD
     form_themes:
           # Bootstrap:
           - bootstrap_4_horizontal_layout.html.twig
-
-=======
->>>>>>> 62ba3b56739c621f4806b4e2acbddf69fcb3c6f2
