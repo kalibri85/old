@@ -7,15 +7,41 @@
         <title>{% block title %}Registracija{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+            <link href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.common-bootstrap.min.css" rel="stylesheet" />
+            <link href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.bootstrap.min.css" rel="stylesheet" />
         {% endblock %}
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico')}}">
         {% block canonical_meta %}{% endblock %}
+        <style>
+            .dva {
+                position: relative;
+            }
+            .dva:after {
+                content: "";
+                position: absolute; top: 0; left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(rgba(255,255,255,1), rgba(255,255,255,.0));
+            }
+        </style>
     </head>
     <body>
         {% block body %}{% endblock %}
         {% block javascripts %}
             <script src="{{ asset('build/js/app.js') }}"></script>
+            <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+            <script type="text/javascript" src="https://kendo.cdn.telerik.com/2018.1.221/js/kendo.ui.core.min.js"></script>
+            <script type="text/javascript" src="https://kendo.cdn.telerik.com/2018.1.221/js/cultures/kendo.culture.lt-LT.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    kendo.culture("lt-LT");
+                    // create Date from input HTML element
+                    $("#search_date").kendoDatePicker({
+                        format: "yyyy-MM-dd"
+                    });
+                });
+            </script>
         {% endblock %}
 
 

@@ -4,10 +4,13 @@
 
 {% block body %}
     <div class="title"></div>
-    <div class="jumbotron">
-        {{ form_start(form, {attr: {class: 'form-wrap mt-4'}}) }}
-        <div class="btn-group" role="group" aria-label="home search">
+    <div class="col-md-12">
+        {{ form_start(form, {attr: {class: 'form-wrap'}}) }}
+        <div class="col-md-6">
              {{ form_widget(form.date) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_widget(form.search, {attr: {class: 'btn-form3'}}) }}
         </div>
         {{ form_end(form) }}
 
