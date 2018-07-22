@@ -6,17 +6,6 @@
     <div class="title"></div>
     <div class="title"></div>
     <div class="col-md-12">
-        {{ form_start(form, {attr: {class: 'form-wrap'}}) }}
-        <div class="col-md-6">
-            {{ form_widget(form.showDate) }}
-        </div>
-        <div class="col-md-6">
-            {{ form_widget(form.search, {attr: {class: 'btn-form3'}}) }}
-        </div>
-        {{ form_end(form) }}
-
-    </div>
-    <div class="col-md-12">
         {% for show in shows %}
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
                 <div class="featured-trip-wrap">
