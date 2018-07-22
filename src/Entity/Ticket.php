@@ -13,6 +13,7 @@ class Ticket
 
     /**
      * @ORM\Id()
+     * @ORM\OneToMany(targetEntity="Order", mappedBy="show")
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */

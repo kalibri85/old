@@ -15,29 +15,26 @@
                                 <div class="text-3">{{ show.Genre.genre }}</div>
                             </div>
                             <p class="border-2">
-                                <span class="fas fa-clock"></span> {{ show.date|date("Y-m-d") }} - {{ show.dateEnd|date("Y-m-d") }}<br>
+                                <span class="fas fa-clock"></span> <span class="show-date" id="date{{ show.id }}">{{ data[show.id].search_date|date("Y-m-d") }}</span><br>
+                                <b>Show will be shown:</b> {{ show.date|date("Y-m-d") }} - {{ show.dateEnd|date("Y-m-d") }}<br>
                                 {% if data[show.id].status == constant('App\\Entity\\Ticket::OPEN_SALE_STATUS') %}
                                     <p class="status-open">{{ data[show.id].status }}</p><br>
                                 {% else %}
                                     <p class="status">{{ data[show.id].status }}</p><br>
                                 {% endif %}
-                                <b>Tickets left:</b> {{ data[show.id].tickets_left}}<br>
-                                <b>Tickets available:</b> {{ data[show.id].tickets_available}}<br>
+                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                    <b>Tickets left:</b> {{ data[show.id].tickets_left}}<br>
+                                {% endif %}
+                                <b>Tickets available:</b> <span class="max-available">{{ data[show.id].tickets_available}}</span><br>
                                 <hr>
                                 <i class="fas fa-euro-sign big-icon"></i>
                                 {% if data[show.id].discount is defined %}
                                     <span class="old-price">{{ show.Genre.price|number_format(2, '.', ',')}}</span>
-                                <span class="price">{{ (show.Genre.price - (show.Genre.price *data[show.id].discount)/100)|number_format(2, '.', ',')}}</span>
+                                    <span class="price">{{ (show.Genre.price - (show.Genre.price *data[show.id].discount)/100)|number_format(2, '.', ',')}}</span>
                                 {% else %}
                                     <span class="price">{{ show.Genre.price |number_format(2, '.', ',')}}</span>
                                 {% endif %}
                             </p>
-                            {% if data[show.id].status == constant('App\\Entity\\Ticket::OPEN_SALE_STATUS') %}
-                                <hr>
-                                <div class="book">
-                                    <a href="#" class="link"><span>BOOK</span></a>
-                                </div>
-                            {% endif %}
                         </div>
                     </div>
                 {% endfor %}
