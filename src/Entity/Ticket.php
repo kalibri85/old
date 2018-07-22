@@ -9,6 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Ticket
 {
+    const OPEN_SALE_STATUS = 'Open for sale';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
