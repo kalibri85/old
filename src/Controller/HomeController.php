@@ -103,7 +103,7 @@ class HomeController extends Controller
                         $ticketsLeft = self::TICKETS_IN_SMALL_HALL - $day*self::TICKETS_AVAILABLE_IN_SMALL_HALL;
                         $data[$value->getId()] += [
                             'tickets_available' => self::TICKETS_AVAILABLE_IN_SMALL_HALL,
-                            'tickets_left' => $ticketsLeft
+                            'tickets_left' => $ticketsLeft,
                         ];
                     }
 
@@ -117,19 +117,22 @@ class HomeController extends Controller
                     $data[$value->getId()] = array(
                         'status' => self::OUT_SALE_STATUS,
                         'tickets_available' => 0,
-                        'tickets_left' => 0
+                        'tickets_left' => 0,
+                        'search_date' => $searchDataValue['showDate'],
                     );
                 } elseif ( $searchDate < $today ) {
                     $data[$value->getId()] = array(
                         'status' => self::PAST_SALE_STATUS,
                         'tickets_available' => 0,
-                        'tickets_left' => 0
+                        'tickets_left' => 0,
+                        'search_date' => $searchDataValue['showDate'],
                     );
                 }  else {
                     $data[$value->getId()] = array(
                         'status' => self::NOT_STARTED_SALE_STATUS,
                         'tickets_available' => 0,
-                        'tickets_left' => self::TICKETS_IN_BIG_HALL
+                        'tickets_left' => self::TICKETS_IN_BIG_HALL,
+                        'search_date' => $searchDataValue['showDate'],
                     );
                 }
 
