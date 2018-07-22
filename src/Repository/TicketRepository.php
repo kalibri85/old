@@ -19,12 +19,13 @@ class TicketRepository extends ServiceEntityRepository
         parent::__construct($registry, Ticket::class);
     }
     /**
-     * @return Trip[]
+     * @return Ticket[]
      */
     public function findAllTickets()
     {
         $tickets = $this->createQueryBuilder('t')
-            ->Where('t.date >= :today')
+            ->Where('t.date_end >= :today')
+            ->andWhere('t.date <= :today')
             ->setParameter('today', new \DateTime());
 
         return $tickets
@@ -32,32 +33,21 @@ class TicketRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-//    /**
-//     * @return Ticket[] Returns an array of Ticket objects
-//     */
-    /*
-    public function findByExampleField($value)
+    public function findByDate($value)
     {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $tickets = $this->createQueryBuilder('t')
+            ->orderBy('t.title', 'asc');
 
-    /*
-    public function findOneBySomeField($value): ?Ticket
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
+        if (isset($value['showDate'])) {
+            $tickets->andWhere('t.date_end >= :showDate')
+                ->andWhere('t.date <= :showDate')
+                ->setParameter('showDate', $value['showDate']);
+
+        }
+
+        return $tickets
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
-    */
+
 }

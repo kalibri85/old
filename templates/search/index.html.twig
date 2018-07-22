@@ -4,9 +4,46 @@
 
 {% block body %}
     <div class="title"></div>
-    <div class="jumbotron">
+    <div class="title"></div>
+    <div class="col-md-12">
+        {{ form_start(form, {attr: {class: 'form-wrap'}}) }}
+        <div class="col-md-6">
+            {{ form_widget(form.showDate) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_widget(form.search, {attr: {class: 'btn-form3'}}) }}
+        </div>
+        {{ form_end(form) }}
 
+    </div>
+    <div class="col-md-12">
+        {% for show in shows %}
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                <div class="featured-trip-wrap">
+                    <a href="">
+                        <div class="featured-title-box">
+                            <div class="bottom-info">
+                                <span class="fas fa-clock"></span> {{ show.date|date("Y-m-d") }} - {{ show.dateEnd|date("Y-m-d") }}
+                                <div class="d-flex flex-row align-middle ml-2">
+                                    {{ show.title }} - {{ show.Genre.genre }}
+                                    <br>
+                                    {{ data[show.id].status }}<br>
+                                    {{ data[show.id].tickets_left}}<br>
+                                    {{ data[show.id].tickets_available}}<br>
+                                    {% if data[show.id].discount is defined %}
+                                        {{ show.Genre.price }}  - 
+                                        {{ show.Genre.price - (show.Genre.price *data[show.id].discount)/100 }}
+                                    {% else %}
+                                        {{ show.Genre.price }}
+                                    {% endif %}
 
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}
 {% block javascripts %}

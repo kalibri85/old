@@ -19,18 +19,6 @@ class GenreRepository extends ServiceEntityRepository
         parent::__construct($registry, Genre::class);
     }
 
-    /*
-    public function findOneBySomeField($value): ?Genre
-    {
-        return $this->createQueryBuilder('g')
-            ->andWhere('g.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
-
     /**
      * @return Genre|null
      */
@@ -41,7 +29,6 @@ class GenreRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
-
 
     public function findOneByGenre($value)
     {

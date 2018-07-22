@@ -49,7 +49,10 @@ class TicketsFixtures extends Fixture
             $entityTicket = new Ticket();
             $entityTicket->setTitle($data[0]);
             $date = new \DateTime($data[1]);
+            $showOutDate = new \DateTime($data[1]);
+            $showOutDate = $showOutDate->modify('+100 day');
             $entityTicket->setDate($date);
+            $entityTicket->setDateEnd($showOutDate);
             $entityTicket->setTicketsAvailable('1');
             $entityTicket->setGenre($this->addGenre(trim($data[2]), $entityManager));
             $entityTicket->setStatus('Sale not started');

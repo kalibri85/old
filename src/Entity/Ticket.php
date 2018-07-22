@@ -32,6 +32,11 @@ class Ticket
     private $date;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $date_end;
+
+    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $tickets_left;
@@ -90,7 +95,17 @@ class Ticket
 
         return $this;
     }
+    public function getDateEnd(): ?\DateTimeInterface
+    {
+        return $this->date_end;
+    }
 
+    public function setDateEnd(\DateTimeInterface $date_end): self
+    {
+        $this->date_end = $date_end;
+
+        return $this;
+    }
     public function getTicketsLeft(): ?int
     {
         return $this->tickets_left;
