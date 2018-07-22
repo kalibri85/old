@@ -9,18 +9,66 @@
         <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
         <link href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.common-bootstrap.min.css" rel="stylesheet" />
         <link href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.bootstrap.min.css" rel="stylesheet" />
+        <link href='http://fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
     {% endblock %}
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico')}}">
     {% block canonical_meta %}{% endblock %}
 </head>
 <body>
-{% block body %}{% endblock %}
+<div class="bgr">
+    <!--==============================header=================================-->
+    <header>
+        <h2 class="method2">Tickets4Sale</h2>
+        <div class="line-after-h2"><img src="images/block-4.png"></div>
+        <nav class="col-md-12">
+            <div class="col-md-10 search-block">
+                <div class="col-md-2 search-title">
+                    Search show:
+                </div>
+                {{ form_start(form, {attr: {class: 'form-wrap'}}) }}
+                <div class="col-md-2 search-input">
+                     {{ form_widget(form.showDate) }}
+                </div>
+                <div class="col-md-7 search-btn">
+                    {{ form_widget(form.search, {attr: {class: 'btn-form3'}}) }}
+                </div>
+                {{ form_end(form) }}
+                <div class="clear"></div>
+            </div>
+            <div class="col-md-2 sign-in-block">
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <div class="sign"><i class="fas fa-user"></i> {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</div>
+                {% else %}
+                    <a class="sign" id="LoginButton" href="{{ path('fos_user_security_login') }}">
+                        <i class="fas fa-unlock-alt"></i> Sign in
+                    </a>
+                {% endif %}
+
+            </div>
+            <div class="clear"></div>
+        </nav>
+        <div id="slide col-lg-12">
+                <div id="sliders">
+                    <div class="slide">
+                        <img src="images/theatre2.jpg" />
+                    </div>
+                    <div class="slide">
+                        <img src="images/theatre.jpg" />
+                    </div>
+                </div>
+        </div>
+    </header>
+    {% block body %}{% endblock %}
+</div>
 {% block javascripts %}
     <script src="{{ asset('build/js/app.js') }}"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://kendo.cdn.telerik.com/2018.1.221/js/kendo.ui.core.min.js"></script>
     <script type="text/javascript" src="https://kendo.cdn.telerik.com/2018.1.221/js/cultures/kendo.culture.lt-LT.min.js"></script>
+
+    <script src="{{ asset('build/js/slider.min.js') }}" ></script>
     <script>
         $(document).ready(function () {
             kendo.culture("lt-LT");
@@ -28,7 +76,17 @@
             $("#search_showDate").kendoDatePicker({
                 format: "yyyy-MM-dd"
             });
+            jQuery('#sliders').skdslider({
+                slideSelector: '.slide',
+                delay:5000,
+                animationSpeed:2000,
+                showNextPrev:true,
+                showPlayButton:true,
+                autoSlide:true,
+                animationType:'fading'
+            });
         });
+
     </script>
 {% endblock %}
 

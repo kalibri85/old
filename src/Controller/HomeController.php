@@ -49,6 +49,7 @@ class HomeController extends Controller
     {
         $form = $this->getSearchForm();
         $form->handleRequest($request);
+
         if($form->isSubmitted() && $form->isValid()){
             $shows = $ticketRepository->findByDate($form->getData());
             $showInfo = $this->getTicketsInfo($shows, $form->getData());
@@ -61,18 +62,6 @@ class HomeController extends Controller
                 ]
             );
         }
-    }
-
-    public function getSearchForm()
-    {
-        return $this->createForm(
-            SearchType::class,
-            null,
-            [
-                'method' => 'GET',
-                'action' => $this->generateUrl('search'),
-            ]
-        );
     }
 
     public function getTicketsInfo($results, $searchDataValue)
@@ -100,7 +89,10 @@ class HomeController extends Controller
                     $startDateToTimestamp = $dateSaleStart->getTimestamp();
                     $todayToTimestamp = $today->getTimestamp();
                     $day = floor(($todayToTimestamp - $startDateToTimestamp) / (60 * 60 * 24));
-                    $data[$value->getId()] = ['status' => self::OPEN_SALE_STATUS];
+                    $data[$value->getId()] = [
+                        'status' => self::OPEN_SALE_STATUS,
+                        'search_date' => $searchDataValue['showDate'],
+                    ];
                     if ($startInSmallHall < $searchDate) {
                         $ticketsLeft = self::TICKETS_IN_BIG_HALL - $day*self::TICKETS_AVAILABLE_IN_BIG_HALL;
                         $data[$value->getId()] += [
@@ -145,9 +137,17 @@ class HomeController extends Controller
         }
         return $data;
     }
+
+    public function getSearchForm()
+    {
+        return $this->createForm(
+            SearchType::class,
+            null,
+            [
+                'method' => 'GET',
+                'action' => $this->generateUrl('search'),
+            ]
+        );
+    }
+
 }
-
-
-
-
-

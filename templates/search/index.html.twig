@@ -3,48 +3,45 @@
 {% block title %}Homepage {% endblock %}
 
 {% block body %}
-    <div class="title"></div>
-    <div class="title"></div>
-    <div class="col-md-12">
-        {{ form_start(form, {attr: {class: 'form-wrap'}}) }}
-        <div class="col-md-6">
-            {{ form_widget(form.showDate) }}
-        </div>
-        <div class="col-md-6">
-            {{ form_widget(form.search, {attr: {class: 'btn-form3'}}) }}
-        </div>
-        {{ form_end(form) }}
+    <section id="content">
+        <div class="block-3 col-sm-12">
 
-    </div>
-    <div class="col-md-12">
-        {% for show in shows %}
-            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
-                <div class="featured-trip-wrap">
-                    <a href="">
-                        <div class="featured-title-box">
-                            <div class="bottom-info">
-                                <span class="fas fa-clock"></span> {{ show.date|date("Y-m-d") }} - {{ show.dateEnd|date("Y-m-d") }}
-                                <div class="d-flex flex-row align-middle ml-2">
-                                    {{ show.title }} - {{ show.Genre.genre }}
-                                    <br>
-                                    {{ data[show.id].status }}<br>
-                                    {{ data[show.id].tickets_left}}<br>
-                                    {{ data[show.id].tickets_available}}<br>
-                                    {% if data[show.id].discount is defined %}
-                                        {{ show.Genre.price }}  - 
-                                        {{ show.Genre.price - (show.Genre.price *data[show.id].discount)/100 }}
-                                    {% else %}
-                                        {{ show.Genre.price }}
-                                    {% endif %}
-
-                                </div>
+            <div class="box-3">
+                {% for show in shows %}
+                    <div class="col-sm-3">
+                        <div class="box-border">
+                            <div class="block-1-title">
+                                <div class="text-4">{{ show.title }}</div>
+                                <div class="text-3">{{ show.Genre.genre }}</div>
                             </div>
+                            <p class="border-2">
+                                <span class="fas fa-clock"></span> <span class="show-date" id="date{{ show.id }}">{{ data[show.id].search_date|date("Y-m-d") }}</span><br>
+                                <b>Show will be shown:</b> {{ show.date|date("Y-m-d") }} - {{ show.dateEnd|date("Y-m-d") }}<br>
+                                {% if data[show.id].status == constant('App\\Entity\\Ticket::OPEN_SALE_STATUS') %}
+                                    <p class="status-open">{{ data[show.id].status }}</p><br>
+                                {% else %}
+                                    <p class="status">{{ data[show.id].status }}</p><br>
+                                {% endif %}
+                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                    <b>Tickets left:</b> {{ data[show.id].tickets_left}}<br>
+                                {% endif %}
+                                <b>Tickets available:</b> <span class="max-available">{{ data[show.id].tickets_available}}</span><br>
+                                <hr>
+                                <i class="fas fa-euro-sign big-icon"></i>
+                                {% if data[show.id].discount is defined %}
+                                    <span class="old-price">{{ show.Genre.price|number_format(2, '.', ',')}}</span>
+                                    <span class="price">{{ (show.Genre.price - (show.Genre.price *data[show.id].discount)/100)|number_format(2, '.', ',')}}</span>
+                                {% else %}
+                                    <span class="price">{{ show.Genre.price |number_format(2, '.', ',')}}</span>
+                                {% endif %}
+                            </p>
                         </div>
-                    </a>
-                </div>
+                    </div>
+                {% endfor %}
+                <div class="clear"></div>
             </div>
-        {% endfor %}
-    </div>
+        </div>
+    </section>
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}

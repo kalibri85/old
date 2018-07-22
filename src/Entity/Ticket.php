@@ -9,8 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Ticket
 {
+    const OPEN_SALE_STATUS = 'Open for sale';
+
     /**
      * @ORM\Id()
+     * @ORM\OneToMany(targetEntity="Order", mappedBy="show")
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */

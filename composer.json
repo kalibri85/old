@@ -22,8 +22,11 @@
   "require-dev": {
     "doctrine/doctrine-fixtures-bundle": "^3.0",
     "squizlabs/php_codesniffer": "*",
+    "symfony/browser-kit": "^4.0",
+    "symfony/css-selector": "^4.0",
     "symfony/debug-bundle": "^4.0",
     "symfony/maker-bundle": "^1.4",
+    "symfony/phpunit-bridge": "^4.0",
     "symfony/profiler-pack": "^1.0"
   },
   "config": {

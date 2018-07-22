@@ -1,0 +1,235 @@
+/* Global properties ======================================================== */
+html, body {
+  width:100%;
+  padding:0;
+  margin:0;
+}
+
+body {
+  background:url(/images/bgr2.jpg) center top no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font: 14px/18px "Times New Roman", Times, serif;
+  color:#b4b4b4;
+}
+.bgr {
+  width:100%;
+}
+
+/***********************************************************************/
+a {
+  text-decoration:none;
+  cursor:pointer;
+  text-decoration:none;
+}
+a:hover {text-decoration:none;}
+
+h1 {
+  display:inline-block;
+  z-index:100;
+  margin-left:104px;
+  padding-left:194px;
+}
+h2 {
+  font-size: 80px;
+  text-align: center;
+  margin: 40px;
+  color: #ffffff;
+  font-family: 'Great Vibes', cursive;
+  line-height: 90px;
+  font-weight:normal;
+  font-style:italic;
+  text-shadow:#cc7b7b 0 0 3px;
+}
+.h2 { text-align:center;}
+.line-after-h2 {
+  position: relative;
+  text-align: center;
+  top: -30px;
+}
+h3 {
+  font-size:36px;
+  line-height:45px;
+  color:#131313;
+  font-weight:normal;
+  font-style:italic;
+  text-shadow:#6c6c6c 0px 0px 3px;
+}
+h4 {
+  font-size:24px;
+  line-height:38px;
+  color:#131313;
+  font-weight:normal;
+  font-style:italic;
+  text-shadow:#6c6c6c 0px 0px 3px;
+}
+h5 {
+  font-size:30px;
+  line-height:36px;
+  color:#131313;
+  font-weight:normal;
+  font-style:italic;
+  text-shadow:#6c6c6c 0px 0px 3px;
+}
+ul {
+  margin:0;
+  padding:0;
+  list-style-image:none;
+}
+
+/******************************************************************/
+.clear {clear:both; line-height:0; font-size:0; width:100%;}
+.wrapper {width:100%; overflow:hidden; position:relative}
+.wrap {overflow:hidden; position:relative;}
+.extra-wrap {overflow:hidden;}
+.center {text-align:center;}
+.nowrap {white-space:nowrap;}
+
+.last {margin-right:0px !important; padding-right:0px !important;}
+
+.p1 {padding-bottom:18px;}
+.p2 {padding-bottom:13px;}
+
+/*********************************header*************************************/
+header {
+  width:90%;
+  margin:0px auto;
+  padding-top:27px;
+  z-index:101;
+  position:relative;
+}
+nav {
+  background: url(/images/bg.gif) center 0 repeat;
+  border:#d3d3d3 1px solid;
+  margin-top:8px;
+}
+
+.search-block {
+  float:left;
+  padding:14px 0 7px 0;
+}
+.search-title {
+  float:left;
+  font-size: 40px;
+  font-family: 'Great Vibes', cursive;
+  color: #000000;
+  position:relative;
+  top:10px;
+}
+.search-input {
+  float:left;
+
+}
+.form-control {
+  width:50%;
+}
+.search-btn {
+  float:left;
+  position: relative;
+  top: -3px;
+
+}
+.btn-form3.btn {
+  font-size: 27px;
+  font-family: 'Great Vibes', cursive;
+  background: #ffffff;
+  margin:0;
+  padding:0 10px 0 10px;
+}
+.btn-form3.btn:hover {
+  background: #000000;
+  color: #ffffff;
+}
+.sign-in-block {
+  margin-top:14px;
+  float:left;
+}
+.sign {
+  font-size: 30px;
+  font-family: 'Great Vibes', cursive;
+  color: #000000;
+
+}
+
+/*********************************content*************************************/
+#content {
+  width:90%;
+  margin:0 auto;
+  position:relative;
+}
+.block-3 {
+  background: #ffffff;
+  overflow:hidden;
+  padding-top:17px;
+  padding-bottom: 40px;
+  border:#bebebe 1px solid;
+  border-top:none;
+}
+.box-3 div.col-sm-3 {
+  float:left;
+  text-align:center;
+  padding-right:10px;
+  margin-top:20px;
+}
+.box-border {
+  border:#bebebe 1px solid;
+}
+.box-3 div.col-sm-3 p {margin-top:11px;}
+.border-2 {
+  padding-bottom:6px;
+  margin-bottom:5px;
+}
+
+.block-1-title {
+  height:81px;
+}
+div.text-4 {
+  font-size:20px;
+  color:#131313;
+  text-shadow:#a7a7a7 0 0 3px;
+  padding-left:5px;
+  padding-top:10px;
+}
+div.text-3 {
+  font-size:20px;
+  color:#131313;
+  padding-left:5px;
+  padding-top:10px;
+}
+.big-icon {
+  font-size: 20px;
+  color:red;
+}
+.old-price {
+  text-decoration: line-through;
+  font-size:15px;
+}
+.price {
+  font-size:20px;
+  color:red;
+}
+.status {
+  font-size:20px;
+  font-weight:bold;
+  color:red;
+}
+.status-open {
+  font-size:20px;
+  font-weight:bold;
+  color:green;
+}
+.book{
+  margin: 15px;
+}
+.link {
+  font-weight:normal;
+  font-size: 20px;
+}
+.link>span {
+  color:#50b3bc;
+  text-decoration:underline;
+}
+.link:hover {text-decoration:none;}
+
