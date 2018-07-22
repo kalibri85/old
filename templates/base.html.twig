@@ -38,9 +38,14 @@
                 <div class="clear"></div>
             </div>
             <div class="col-md-2 sign-in-block">
-                <a class="sign" id="LoginButton" href="{{ path('fos_user_security_login') }}">
-                    <i class="fas fa-unlock-alt"></i> Sign in
-                </a>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <div class="sign"><i class="fas fa-user"></i> {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</div>
+                {% else %}
+                    <a class="sign" id="LoginButton" href="{{ path('fos_user_security_login') }}">
+                        <i class="fas fa-unlock-alt"></i> Sign in
+                    </a>
+                {% endif %}
+
             </div>
             <div class="clear"></div>
         </nav>
